@@ -1,6 +1,4 @@
-// const secretkey = "ad6aeff92fed456a9f9f35f851fcd459";
 const tokenurl = "https://accounts.spotify.com/api/token";
-// const clientid = "5885c544543f44caa2ef474955990a77";
 
 const ct = "application/x-www-form-urlencoded";
 const urlparam = new URLSearchParams(window.location.search);
@@ -31,7 +29,6 @@ function generate() {
   .catch(error => {
     console.error('Error:', error);
   });
-  write()
 }
 
 
@@ -40,6 +37,7 @@ const artimg = document.getElementById("artistimg");
 const artname = document.getElementById("artistname");
 const popularity = document.getElementById("pop");
 const albumlist = document.getElementById("albumscroll");
+const songlist = document.getElementById('topsonglist')
 
 
 function findartist() {
@@ -59,6 +57,7 @@ function findartist() {
     popularity.innerHTML = `Popularity Score: ${data.popularity}`;
   })
   findalbum();
+  gettopsongs();
 }
 
 function findalbum() {
@@ -115,5 +114,53 @@ function findalbum() {
   })
 }
 
-// const findartist = document.getElementById("find");
-// findartist.addEventListener("click", generate());
+function gettopsongs() {
+  songlist.innerHTML="";
+  fetch(`https://api.spotify.com/v1/artists/${artid}/top-tracks?market=in`, {
+    headers:{
+      "Authorization":headerauth
+    }
+  })
+  .then(response=>response.json())
+  .then(data => {
+    console.log(data);
+    data.tracks.forEach((item, _) => {
+      console.log(item.name);
+      const adivi1 = document.createElement("div");
+      adivi1.classList.add("adivi1");
+      const adivi11 = document.createElement("div");
+      adivi11.classList.add("adivi11");
+      const adivi12 = document.createElement("div");
+      adivi12.classList.add("adivi12");
+      const adivi13 = document.createElement("div");
+      adivi13.classList.add("adivi13");
+      const slimg = document.createElement("img");
+      slimg.src = item.album.images[0].url;
+      slimg.classList.add("Slimg");
+      slimg.alt = "Not loaded"
+      adivi11.appendChild(slimg);
+      const slname = document.createElement("p");
+      slname.innerHTML = item.name;
+      slname.classList.add("slname");
+      adivi12.appendChild(slname);
+      let timet = item.duration_ms / 1000;
+      let mint = 0;
+      console.log(timet);
+      while (timet > 60) {
+        timet = timet - 60;
+        mint = parseFloat(mint) + 1; 
+        console.log(mint);
+      }
+      console.log(`${mint} Minutes ${Math.trunc(timet)} Seconds`);
+      const sltime = document.createElement("p");
+      sltime.innerHTML = `${mint}:${Math.trunc(timet)}`;
+      sltime.classList.add("sltime");
+      adivi13.appendChild(sltime);
+      adivi1.appendChild(adivi11);
+      adivi1.appendChild(adivi12);
+      adivi1.appendChild(adivi13);
+      songlist.appendChild(adivi1);
+
+    });
+  })
+}

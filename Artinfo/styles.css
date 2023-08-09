@@ -2,15 +2,25 @@
     font-family: 'Roboto', 'sans-serif';
 }
 
-.top, .bottom {
-    max-height: 50vh;
-    max-width: 100vw;
+body {
+    background-color: #1f1f1f;
+    color: rgb(193, 193, 193);
+}
+
+.top{
     display: flex;
 }
+
+.bottom {
+    display: flex;
+    justify-content: center;
+}
+
 #artistimg {
-    max-width: 20%;
+    /* max-width: 20vw; */
     border-radius: 20%;
 }
+
 .Alimg {
     max-width: 200px;
     max-height: 200px;
@@ -19,13 +29,21 @@
 
 }
 
+
+.albums {
+    max-width: 98vw;
+    overflow: auto;
+}
+
 .allist {
     display:inline-block;
 }
 
-ul {
+#albumscroll {
+    white-space: nowrap;
     padding-left: 0px;
-    overflow: scroll;
+    overflow-x: scroll;
+    width: 100%;
 }
 
 .divi{
@@ -81,4 +99,32 @@ li {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+}
+
+div {
+    border: 1px solid red;
+}
+
+.artinfo {
+    border: 1px white solid;
+    flex-basis: 100%;
+}
+
+
+.Slimg {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 5px;
+    box-shadow: 5px 10px 10px #242424;
+}
+
+.adivi1 {
+    display: flex;
+    padding: 10px;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.adivi11 {
+    margin: 10px;
 }
