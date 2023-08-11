@@ -16,19 +16,15 @@ let toktype="";
 console.log("Initialized");
 let headerauth;
 
-function generate() {
-  fetch(tokenurl, options)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    btoken = data.access_token;
-    toktype = data.token_type;
-    console.log(btoken,toktype)
-    headerauth = `${toktype} ${btoken}`;
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+async function generate() {
+  const response = await fetch(tokenurl, options);
+  const data = await response.json();
+  console.log(data);
+  btoken = data.access_token;
+  toktype = data.token_type;
+  console.log(btoken,toktype)
+  headerauth = `${toktype} ${btoken}`;
+  console.log("Generated")
 }
 
 
@@ -40,46 +36,42 @@ const albumlist = document.getElementById("albumscroll");
 const songlist = document.getElementById('topsonglist')
 
 
-function findartist() {
-  // generate()
-  fetch(`https://api.spotify.com/v1/artists/${artid}`, {
+async function findartist() {
+  await generate()
+  const reponse = await fetch(`https://api.spotify.com/v1/artists/${artid}`, {
     headers:{
       "Authorization":headerauth
     }
   })
-  .then(response => response.json())
-  .then(data => {
+  const data = await reponse.json();
+  console.log("started")
     console.log(data);
     console.log(`Name: ${data.name}`);
     console.log(`Popularity: ${data.popularity}`);
     artimg.src = data.images[0].url;
     artname.innerHTML = data.name;
     popularity.innerHTML = `Popularity Score: ${data.popularity}`;
-  })
   findalbum();
   gettopsongs();
 }
 
-function findalbum() {
+async function findalbum() {
   albumlist.innerHTML="";
-  fetch(`https://api.spotify.com/v1/artists/${artid}/albums?market=IN&limit=10`, {
+  const response = await fetch(`https://api.spotify.com/v1/artists/${artid}/albums?market=IN&limit=10`, {
     headers:{
       "Authorization":headerauth
     }
   })
-  .then(response=>response.json())
-  .then(data => {
-    console.log(data);
-    // REWRITE THIS AND PUT IT INTO ONE DIV BEFORE APPENDING
+  const data = await response.json();
+  console.log(data);
     data.items.forEach((item, _) => {
-      // console.log(item.images[0].url);
       const listitem = document.createElement("li");
       listitem.classList.add("allist")
-      const divi = document.createElement("div"); //creating outside div
+      const divi = document.createElement("div");
       divi.classList.add("divi")
-      const divi1 = document.createElement("div"); //creating inside div 1
+      const divi1 = document.createElement("div");
       divi1.classList.add("divi1")
-      const divi2 = document.createElement("div"); //creating inside div 2
+      const divi2 = document.createElement("div");
       divi2.classList.add("divi2")
       let alimg = document.createElement("img");
       alimg.src = item.images[0].url;
@@ -99,7 +91,7 @@ function findalbum() {
         altrackno.innerHTML = `${item.total_tracks} track`;
       }
       altrackno.classList.add("altrack");
-      const divi21 = document.createElement("div"); //creating inside div 2
+      const divi21 = document.createElement("div");
       divi21.classList.add("divi21")
       divi2.appendChild(alname);
       divi21.appendChild(aldate);
@@ -111,56 +103,61 @@ function findalbum() {
       listitem.appendChild(divi)
       albumlist.appendChild(listitem);
     });
-  })
 }
 
-function gettopsongs() {
+async function gettopsongs() {
   songlist.innerHTML="";
-  fetch(`https://api.spotify.com/v1/artists/${artid}/top-tracks?market=in`, {
+  const response = await fetch(`https://api.spotify.com/v1/artists/${artid}/top-tracks?market=in`, {
     headers:{
       "Authorization":headerauth
     }
   })
-  .then(response=>response.json())
-  .then(data => {
-    console.log(data);
-    data.tracks.forEach((item, _) => {
-      console.log(item.name);
-      const adivi1 = document.createElement("div");
-      adivi1.classList.add("adivi1");
-      const adivi11 = document.createElement("div");
-      adivi11.classList.add("adivi11");
-      const adivi12 = document.createElement("div");
-      adivi12.classList.add("adivi12");
-      const adivi13 = document.createElement("div");
-      adivi13.classList.add("adivi13");
-      const slimg = document.createElement("img");
-      slimg.src = item.album.images[0].url;
-      slimg.classList.add("Slimg");
-      slimg.alt = "Not loaded"
-      adivi11.appendChild(slimg);
-      const slname = document.createElement("p");
-      slname.innerHTML = item.name;
-      slname.classList.add("slname");
-      adivi12.appendChild(slname);
-      let timet = item.duration_ms / 1000;
-      let mint = 0;
-      console.log(timet);
-      while (timet > 60) {
-        timet = timet - 60;
-        mint = parseFloat(mint) + 1; 
-        console.log(mint);
-      }
-      console.log(`${mint} Minutes ${Math.trunc(timet)} Seconds`);
-      const sltime = document.createElement("p");
-      sltime.innerHTML = `${mint}:${Math.trunc(timet)}`;
-      sltime.classList.add("sltime");
-      adivi13.appendChild(sltime);
-      adivi1.appendChild(adivi11);
-      adivi1.appendChild(adivi12);
-      adivi1.appendChild(adivi13);
-      songlist.appendChild(adivi1);
-
-    });
-  })
+  const data = await response.json();
+  console.log(data);
+  data.tracks.forEach((item, _) => {
+    console.log(item.name);
+    const adivi1 = document.createElement("div");
+    adivi1.classList.add("adivi1");
+    const adivi11 = document.createElement("div");
+    adivi11.classList.add("adivi11");
+    const adivi12 = document.createElement("div");
+    adivi12.classList.add("adivi12");
+    const adivi13 = document.createElement("div");
+    adivi13.classList.add("adivi13");
+    const slimg = document.createElement("img");
+    slimg.src = item.album.images[0].url;
+    slimg.classList.add("Slimg");
+    slimg.alt = "Not loaded"
+    adivi11.appendChild(slimg);
+    const slname = document.createElement("p");
+    slname.innerHTML = item.name;
+    slname.classList.add("slname");
+    adivi12.appendChild(slname);
+    let timet = item.duration_ms / 1000;
+    let mint = 0;
+    console.log(timet);
+    while (timet > 60) {
+      timet = timet - 60;
+      mint = parseFloat(mint) + 1; 
+    }
+    console.log("seconds",timet);
+    timet = Math.trunc(timet);
+    console.log("seconds",timet);
+    if (timet < 10) {
+      timet = timet.toString()
+      timet = "0" + timet;
+    }
+    console.log(`${mint} Minutes ${timet} Seconds`);
+    const sltime = document.createElement("p");
+    sltime.innerHTML = `${mint}:${timet}`;
+    sltime.classList.add("sltime");
+    const adivio = document.createElement("div");
+    adivio.classList.add("adivio");
+    adivio.appendChild(adivi12);
+    adivio.appendChild(adivi13);
+    adivi13.appendChild(sltime);
+    adivi1.appendChild(adivi11);
+    adivi1.appendChild(adivio);
+    songlist.appendChild(adivi1);
+  });
 }

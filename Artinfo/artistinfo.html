@@ -13,17 +13,15 @@
 
 <body onload="findartist()">
     <div class="top">
-        <img id="artistimg" alt="">
-        <!-- Artist name, popularity and popular albumns -->
         <div class="artinfo">
+            <img id="artistimg" alt="">
             <div class="nameinfo">
                 <h1 id="artistname">Testing</h1>
                 <p id="pop"></p>
             </div>
-            <div id="topsongs">
-                iSongs
-                <ul id="topsonglist"></ul>
-            </div>
+        </div>
+        <div id="topsongs">
+            <ul id="topsonglist"></ul>
         </div>
     </div>
     <div class="bottom">
@@ -31,8 +29,6 @@
             <ul id="albumscroll"></ul>
         </div>
     </div>
-    <button onclick="generate()" id="gen">Gen</button>
-    <button onclick="findartist()" id="find">Find</button>
 </body>
 <script src="/Sekret/sekret.js"></script>
 <script src="script.js"></script>

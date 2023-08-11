@@ -9,6 +9,8 @@ body {
 
 .top{
     display: flex;
+    min-height: 60vh;
+    flex: 1;
 }
 
 .bottom {
@@ -16,9 +18,21 @@ body {
     justify-content: center;
 }
 
+.artinfo {
+    flex-basis: 20%;
+}
+
+.nameinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #artistimg {
-    /* max-width: 20vw; */
     border-radius: 20%;
+    object-fit: cover;
+    width: 100%;
 }
 
 .Alimg {
@@ -49,7 +63,7 @@ body {
 .divi{
     width: 250px;
     height: 330px;
-    background-color: #242424;
+    background-color: #282828;
     border-radius: 10%;
     display: flex;
     align-items: center;
@@ -58,7 +72,6 @@ body {
 
 .divi:hover{
     background-color: #424242;
-    /* opacity: 80%;    */
 }
 
 .divi1{
@@ -86,10 +99,6 @@ body {
     overflow: hidden;
 }
 
-.divi, .divi1, .divi2 {
-    /* border: 1px solid red; */
-}
-
 li {
     margin: 5px;
 }
@@ -101,30 +110,61 @@ li {
     align-items: center;
 }
 
-div {
-    border: 1px solid red;
-}
-
-.artinfo {
-    border: 1px white solid;
+#topsongs {
     flex-basis: 100%;
 }
 
+#topsonglist {
+    padding: 0px;
+    margin: 0px;
+    white-space: nowrap;
+    padding-left: 0px;
+    overflow-y: scroll;
+    width: 100%;
+    height: 60vh;
+}
 
 .Slimg {
     max-width: 50px;
     max-height: 50px;
     border-radius: 5px;
-    box-shadow: 5px 10px 10px #242424;
 }
 
 .adivi1 {
     display: flex;
     padding: 10px;
-    /* justify-content: center; */
     align-items: center;
+    background-color: #282828;
+    margin: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+    border-radius: 25px;
+    font-size: large;
+}
+
+.adivi1:hover {
+    background-color: #424242;
+    box-shadow: 5px 5px 10px #000000;
+}
+
+.adivi1:hover .Slimg{
+    box-shadow: 5px 5px 10px #242424;
 }
 
 .adivi11 {
     margin: 10px;
 }
+
+.adivio {
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 100%;
+}
+
+.adivi13 {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
