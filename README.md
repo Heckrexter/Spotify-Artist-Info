@@ -8,4 +8,4 @@ the website returns the artists:<br>
     Top Tracks<br>
     Top Albumns<br><br>
 
-Link to the Website deployment: [https://spotify-info-chi.vercel.app/] (https://spotify-info-chi.vercel.app/)
+Link to the Website deployment: https://spotify-info-chi.vercel.app/
