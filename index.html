@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-    <p>Enter the Artist URL below</p>
-    <input type="text" id="artsid">
-    <button onclick="artid()">Find Artist</button>
+    <div class="main">
+        <p>Enter the Artist URL below</p>
+        <input type="text" id="artsid" onclick="clearinput()">
+        <button onclick="artid()">Find Artist</button>
+    </div>
 </body>
 <script src="script.js"></script>
 </html>

@@ -1,0 +1,64 @@
+* {
+    font-family: 'Roboto', 'sans-serif';
+}
+
+body {
+    background-color: #1f1f1f;
+    color: rgb(193, 193, 193);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 99.6vw;
+    height: 90vh;
+}
+
+p {
+    font-size: 40px;
+    text-shadow: 0px 1px 5px rgb(144, 144, 144);
+    /* font-family: */
+    margin-bottom: 50px;
+}
+
+#artsid {
+    background-color: #1f1f1f00;
+    width: 10vw;
+    min-width: min-content;
+    height: 5vh;
+    border: none;
+    border-radius: 20px;
+    outline: 3px solid rgba(255, 255, 255, 0.186); 
+    box-shadow: 0px 0px 40px rgb(95, 1, 149);
+    transition: width 1s;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 150%;
+}
+
+#artsid:focus {
+    width: 70vw;
+    /* width: fit-content; */
+    /* transition: 5s; */
+    /* float: top; */
+}
+
+button {
+    margin-top: 30px;
+    width: 20%;
+    height: 3%;
+    border: none;
+    border-radius: 20px;
+    outline: 3px solid rgba(255, 255, 255, 0.186); 
+    box-shadow: 0px 0px 100px rgb(95, 1, 149);
+    background-color: #000000;
+    color: white;
+    font-size: 150%;
+    height: 5vh;
+    width: 20vh;
+}
+
