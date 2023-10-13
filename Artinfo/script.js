@@ -3,7 +3,6 @@ const tokenurl = "https://accounts.spotify.com/api/token";
 const ct = "application/x-www-form-urlencoded";
 const urlparam = new URLSearchParams(window.location.search);
 const artid = urlparam.get('artid');
-console.log(artid);
 const options = {
     method: 'POST',
     headers: {
@@ -13,18 +12,14 @@ const options = {
 }
 let btoken="";
 let toktype="";
-console.log("Initialized");
 let headerauth;
 
 async function generate() {
   const response = await fetch(tokenurl, options);
   const data = await response.json();
-  console.log(data);
   btoken = data.access_token;
   toktype = data.token_type;
-  console.log(btoken,toktype)
   headerauth = `${toktype} ${btoken}`;
-  console.log("Generated")
 }
 
 
@@ -44,10 +39,6 @@ async function findartist() {
     }
   })
   const data = await reponse.json();
-  console.log("started")
-    console.log(data);
-    console.log(`Name: ${data.name}`);
-    console.log(`Popularity: ${data.popularity}`);
     artimg.src = data.images[0].url;
     artname.innerHTML = data.name;
     popularity.innerHTML = `Popularity Score: ${data.popularity}`;
@@ -63,7 +54,6 @@ async function findalbum() {
     }
   })
   const data = await response.json();
-  console.log(data);
     data.items.forEach((item, _) => {
       const listitem = document.createElement("li");
       listitem.classList.add("allist")
@@ -113,9 +103,7 @@ async function gettopsongs() {
     }
   })
   const data = await response.json();
-  console.log(data);
   data.tracks.forEach((item, _) => {
-    console.log(item.name);
     const adivi1 = document.createElement("div");
     adivi1.classList.add("adivi1");
     const adivi11 = document.createElement("div");
@@ -135,19 +123,15 @@ async function gettopsongs() {
     adivi12.appendChild(slname);
     let timet = item.duration_ms / 1000;
     let mint = 0;
-    console.log(timet);
     while (timet > 60) {
       timet = timet - 60;
       mint = parseFloat(mint) + 1; 
     }
-    console.log("seconds",timet);
     timet = Math.trunc(timet);
-    console.log("seconds",timet);
     if (timet < 10) {
       timet = timet.toString()
       timet = "0" + timet;
     }
-    console.log(`${mint} Minutes ${timet} Seconds`);
     const sltime = document.createElement("p");
     sltime.innerHTML = `${mint}:${timet}`;
     sltime.classList.add("sltime");
